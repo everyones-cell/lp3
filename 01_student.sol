@@ -26,7 +26,14 @@ contract StudentData {
         return students.length;
     }
 
-    fallback() external payable {}
+    event FallbackCalled(address sender, uint value);
+event ReceiveCalled(address sender, uint value);
 
-    receive() external payable {}
+fallback() external payable {
+    emit FallbackCalled(msg.sender, msg.value);
+}
+
+receive() external payable {
+    emit ReceiveCalled(msg.sender, msg.value);
+}
 }
