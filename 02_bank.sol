@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
@@ -6,7 +5,6 @@ contract SimpleBank {
 
     mapping(address => uint) public balance;
 
-    // Accept Ether during deployment
     constructor() payable {
         balance[msg.sender] = msg.value;
     }
@@ -17,8 +15,7 @@ contract SimpleBank {
     }
 
     function withdraw(uint amount) public {
-        require(amount > 0, "Invalid amount");
-        require(balance[msg.sender] >= amount, "Insufficient balance");
+        require(amount > 0 && balance[msg.sender] >= amount, "Invalid amount");
 
         balance[msg.sender] -= amount;
 
